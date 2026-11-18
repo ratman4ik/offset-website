@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/asset-path";
+
 export type Project = {
   index: string;
   title: string;
@@ -25,7 +27,7 @@ export const projects: Project[] = [
     category: "Hospitality / Website",
     creator: "EGOR",
     url: "https://ratman4ik.github.io/afterhours-cafe/",
-    preview: "/projects/after-hours.webp",
+    preview: assetPath("/projects/after-hours.webp"),
     previewAlt: "AFTER HOURS café website homepage",
   },
   {
@@ -34,7 +36,7 @@ export const projects: Project[] = [
     category: "Automotive / Website",
     creator: "EGOR",
     url: "https://premium-detailing-homepage.ratman4ik.chatgpt.site/",
-    preview: "/projects/noir-auto.png",
+    preview: assetPath("/projects/noir-auto.png"),
     previewAlt: "NOIR AUTO automotive detailing website homepage",
     previewPosition: "center",
   },
@@ -44,7 +46,7 @@ export const projects: Project[] = [
     category: "Barbershop / Website",
     creator: "LITVA",
     url: "https://kyniks23.github.io/garage-barbershop/",
-    preview: "/projects/garage-barbershop.webp",
+    preview: assetPath("/projects/garage-barbershop.webp"),
     previewAlt: "GARAGE BARBERSHOP website homepage",
   },
   {
@@ -53,7 +55,7 @@ export const projects: Project[] = [
     category: "Automotive / Showcase",
     creator: "MATVEY",
     url: "https://ifaet111.github.io/detailing-demo-showcase/",
-    preview: "/projects/aurum-detailing.webp",
+    preview: assetPath("/projects/aurum-detailing.webp"),
     previewAlt: "AURUM detailing showcase homepage",
   },
   {
@@ -62,7 +64,7 @@ export const projects: Project[] = [
     category: "Hospitality / Collection",
     creator: "MATVEY",
     url: "https://ifaet111.github.io/cafe-website-collection/index.html",
-    preview: "/projects/cafe-concepts.webp",
+    preview: assetPath("/projects/cafe-concepts.webp"),
     previewAlt: "Five café concepts collection homepage",
   },
 ];
@@ -72,7 +74,7 @@ export const team: TeamMember[] = [
     name: "Egor",
     role: "Creative Director",
     discipline: "ART DIRECTION / SYSTEMS",
-    photo: "/team/egor.png",
+    photo: assetPath("/team/egor.png"),
     serial: "OFS-CD-001",
     badge: "direction",
   },
@@ -80,7 +82,7 @@ export const team: TeamMember[] = [
     name: "Matvey",
     role: "Lead Developer",
     discipline: "BUILD / INTERACTION",
-    photo: "/team/matvey.png",
+    photo: assetPath("/team/matvey.png"),
     serial: "OFS-LD-002",
     badge: "development",
   },
@@ -88,7 +90,7 @@ export const team: TeamMember[] = [
     name: "Litva",
     role: "Digital Designer",
     discipline: "INTERFACE / FORM",
-    photo: "/team/litva.png",
+    photo: assetPath("/team/litva.png"),
     serial: "OFS-DD-003",
     badge: "design",
   },

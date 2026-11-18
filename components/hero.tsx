@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useEffect, useRef } from "react";
 import { ArrowDown } from "@/components/icons";
 import { OffsetEmblem } from "@/components/offset-emblem";
+import { assetPath } from "@/lib/asset-path";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -41,7 +42,7 @@ export function Hero() {
           preload="metadata"
           tabIndex={-1}
         >
-          <source src="/videos/offset-background.webm" type="video/mp4" />
+          <source src={assetPath("/videos/offset-background.webm")} type="video/webm" />
         </video>
       </div>
 

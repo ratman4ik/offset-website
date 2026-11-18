@@ -4,8 +4,9 @@ import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { assetPath } from "@/lib/asset-path";
 
-const EMBLEM_MODEL_PATH = "/models/OFFSET_emblem_lime_chrome.glb";
+const EMBLEM_MODEL_PATH = assetPath("/models/OFFSET_emblem_lime_chrome.glb");
 const EMBLEM_TARGET_SIZE = 3.35;
 const IDLE_ROTATION_SPEED = Math.PI / 10;
 const DRAG_SENSITIVITY = 0.008;
