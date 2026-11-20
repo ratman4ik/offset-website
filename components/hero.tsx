@@ -11,6 +11,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const backgroundVideoRef = useRef<HTMLVideoElement>(null);
+  const backgroundPoster = assetPath("/videos/offset-background-poster.jpg");
   const { scrollY } = useScroll();
   const wordmarkY = useTransform(scrollY, [0, 800], [0, reduceMotion ? 0 : 80]);
 
@@ -18,20 +19,41 @@ export function Hero() {
     const video = backgroundVideoRef.current;
     if (!video) return;
 
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+
     if (reduceMotion) {
       video.pause();
       video.currentTime = 0;
       return;
     }
 
-    void video.play().catch(() => {
-      // The solid panel remains visible when autoplay is unavailable.
-    });
+    const playVideo = () => {
+      void video.play().catch(() => {
+        // The poster remains visible when autoplay is unavailable.
+      });
+    };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) playVideo();
+    };
+
+    playVideo();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [reduceMotion]);
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
-      <div className="hero-wordmark-media" aria-hidden="true">
+      <div
+        className="hero-wordmark-media"
+        style={{ backgroundImage: `url("${backgroundPoster}")` }}
+        aria-hidden="true"
+      >
         <video
           ref={backgroundVideoRef}
           className="hero-wordmark-video"
@@ -39,10 +61,15 @@ export function Hero() {
           muted
           loop
           playsInline
-          preload="metadata"
+          poster={backgroundPoster}
+          preload="auto"
           tabIndex={-1}
         >
-          <source src={assetPath("/videos/offset-background.webm")} type="video/webm" />
+          <source
+            src={assetPath("/videos/offset-background.webm")}
+            type='video/webm; codecs="vp9"'
+          />
+          <source src={assetPath("/videos/offset-background.mp4")} type="video/mp4" />
         </video>
       </div>
 

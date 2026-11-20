@@ -327,7 +327,10 @@ button {
   left: 0;
   z-index: -2;
   overflow: hidden;
-  background: var(--ink);
+  background-color: var(--ink);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   pointer-events: none;
 }
 
@@ -1350,17 +1353,38 @@ button {
   margin: 0 0 0.6rem;
 }
 
-.contact-placeholder {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.5rem;
-  align-items: center;
-  padding: 1.4rem 0;
+.contact-form {
+  position: relative;
   border-top: 1px solid var(--paper);
   border-bottom: 1px solid var(--paper);
 }
 
-.contact-placeholder span {
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-field {
+  display: grid;
+  grid-template-rows: auto minmax(2.5rem, auto) auto;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 1rem 1.25rem 0.9rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact-field:nth-child(2) {
+  padding-right: 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+
+.contact-field-message {
+  grid-column: 1 / -1;
+  padding-right: 0;
+}
+
+.contact-field label {
   color: var(--muted);
   font-family: var(--display);
   font-size: 0.67rem;
@@ -1369,16 +1393,108 @@ button {
   text-transform: uppercase;
 }
 
-.contact-placeholder strong {
-  font-family: var(--display);
-  font-size: clamp(1.1rem, 2.5vw, 2.5rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 0.25rem 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--paper);
+  font: 500 clamp(1rem, 1.5vw, 1.3rem) / 1.35 var(--display);
+  letter-spacing: -0.025em;
+  resize: vertical;
 }
 
-.contact-placeholder svg {
-  width: 1.5rem;
+.contact-field textarea {
+  min-height: 6.25rem;
+}
+
+.contact-field input:focus-visible,
+.contact-field textarea:focus-visible {
+  outline: 0;
+  box-shadow: inset 0 -2px 0 var(--acid);
+}
+
+.contact-field input[aria-invalid="true"],
+.contact-field textarea[aria-invalid="true"] {
+  box-shadow: inset 0 -1px 0 var(--acid);
+}
+
+.contact-field-error {
+  color: var(--acid);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.contact-form-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  min-height: 4.75rem;
+  padding: 0.85rem 0;
+}
+
+.contact-form-status {
+  margin: 0;
   color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.contact-form-status[data-state="success"],
+.contact-form-status[data-state="error"] {
+  color: var(--paper);
+}
+
+.contact-submit {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 10.5rem;
+  padding: 0.8rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--acid);
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 180ms ease-out;
+}
+
+.contact-submit svg {
+  width: 1.1rem;
+  color: var(--acid);
+  transition: transform 180ms ease-out;
+}
+
+.contact-submit:hover {
+  color: var(--acid);
+}
+
+.contact-submit:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .site-footer {
@@ -1612,13 +1728,26 @@ button {
     gap: 3rem;
   }
 
-  .contact-placeholder {
-    grid-template-columns: 1fr auto;
-    gap: 0.75rem;
+  .contact-form-grid {
+    grid-template-columns: 1fr;
   }
 
-  .contact-placeholder span {
+  .contact-field,
+  .contact-field:nth-child(2) {
     grid-column: 1 / -1;
+    padding-right: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .contact-form-actions {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 1rem 0;
+  }
+
+  .contact-submit {
+    width: 100%;
   }
 
   .site-footer {
